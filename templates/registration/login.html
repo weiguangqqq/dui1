@@ -1,0 +1,30 @@
+
+<link href="/static/css/signin.css" rel="stylesheet">
+
+ 
+{%   block page-content%}
+{% block content %}
+<div align="center">
+          <img  src="/statics/image/1.png"/ width=250px height=100px >
+</div>
+  {% if form.errors %}
+    <p align="center">
+      您的账号与密码并不匹配，
+      请重新输入。
+    </p>
+  {% else %}
+   <p align="center">请输入您的账号与密码</p>
+  {% endif %}
+  <div class="login-form" align="center">
+    <form action="{% url 'login' %}" class="form-signin" method="post">
+      {{ form.as_p }}
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next }}" />
+      <p align="center" ><input type="submit" value="登录" style="color:#FFFFFF;background-color:rgb(14,219,212)"></p>
+    </form>
+    
+    <p align="center"><a href="{% url "password_reset" %}">忘记密码了？点击这里</a></p>
+    <a href="{% url "register" %}">还没有账号？点此加入我们</a>
+  </div>
+ {% endblock %}
+ {% endblock %}

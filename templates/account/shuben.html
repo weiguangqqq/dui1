@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index.html</title>
+    <link rel="stylesheet" type="text/css" href="lab1-3.css">
+    <style type="text/css">
+        a {text-decoration:none}
+        #header
+        {
+            height:30px;
+            background-color:rgb(0,0,0);
+            text-align:left;
+            padding:1px 20px 1px 20px;
+        }
+        #Verdana
+        {
+            font-family:Verdana;
+            font-weight: bold;
+        }
+        #sidebar
+        {
+            background-color:rgb(0,0,0);
+            float:left;
+            height:600px;
+            width:140px;
+            padding:5px;    
+        }
+        #menu
+        {
+            background-color:#FFFFFF;
+            height: 27px;
+            width:1162px;
+            padding: 2px;
+        }
+        #mainbar
+        {
+            background-color:rgb(245,245,245);
+    
+            height:560px;
+            width:1325px;
+            padding:10px;
+
+        }
+         #shujuku
+        {
+            background-color:rgb(235,245,245);
+    
+            height:240px;
+            width:1000px;
+            padding:10px;
+
+        }
+         #fabu
+        {
+            background-color:rgb(255,255,255);
+            
+            height:240px;
+            width:1000px;
+            padding: 2px 10px;
+
+        }
+         
+    </style>
+</head>
+<body>
+    <div id="header">
+   
+        <h4 id="Verdana" style="position:absolute;top:-8px;left:20px;color:rgb(20,210,210);">师大小灵通</h4>
+        <a style="color:rgb(20,200,200);position: absolute;top:13px;right:20px;" href="/login">退出</a><br/>
+    </div>
+
+
+  
+    <div id="sidebar">
+       
+            <br/>
+            <img  src="/statics/image/shiwu1.png" / width=40px height=125px / style="position: absolute;top:50px;left: 10px;">
+            <a style="color:rgb(100,245,245);position: absolute;top:60px;left: 50px;" href="{% url "dashboard" %}">失物招领</a><br/>
+           
+            <a style="color:white;position: absolute;top:89px;left: 50px;" href="{% url "sxiaoyuanka" %}">寻物启事</a><br/>
+            
+            <a style="color:white;position: absolute;top:118px;left: 50px;" href="{% url "xiaoli" %}">各类信息</a><br/>
+            
+            <a style="color:white;position: absolute;top:147px;left: 50px;" href="{% url "taolunqu" %}">讨论区</a><br/>
+    </div>
+    <div id="menu">
+            <dl style="position:absolute;top:30px;left:230px;">
+                <dd>
+                    <a style="color: black;" href="{% url "dashboard" %}">校园卡&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+                    <a style="color: black;" href="{% url "shouji" %}">手机&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+                    <a style="color: rgb(20,210,210);" href="{% url "shuben" %}">书本&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+                    <a style="color: black;" href="{% url "upan" %}">U盘&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+                    <a style="color: black;" href="{% url "zhengjian" %}">证件&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+                    <a style="color: black;" href="{% url "yusan" %}">雨伞&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+                    <a style="color: black;" href="{% url "qita" %}">其他</a>
+                </dd>
+            </dl>
+    </div>
+   <div id="mainbar">
+   <div id="shujuku" style="overflow:auto;position: absolute;top: 80px;left: 200px">
+       <table>
+   </br>
+   {% for lostitem in lostitems %}
+     <tr>
+         <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp认领地点：{{lostitem.claimpla}}&nbsp&nbsp&nbsp&nbsp
+         </td>
+         <td>详细信息：{{lostitem.info}}&nbsp&nbsp&nbsp&nbsp
+         </td>   
+         <td>发布时间：{{lostitem.issuedate}}
+         </td>
+     </tr>
+   {% endfor %}
+       </table>
+   </div>
+      <div id="fabu" style="position: absolute;top: 350px;left: 200px" behavior ="scroll">
+          <form action="{% url 'shuben' %}" method="post">
+            {% csrf_token %}
+            {% load staticfiles %}
+            <h2 style="color: rgb(20,210,210);">物品信息发布</h2>
+            <p>物品类别：书本</p>
+            <label for="claimpla" >认领地点：</label>
+            <input id="claimpla" type="text" name="claimpla" value="{{ claimpla }}"><br />
+            <br/>
+            <label for="info">备注：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+            <input id="info" type="text" name="info" value="{{ info }}"><br />
+            <br/>
+            <input type="submit" value="发布" style="width:146px;color:#FFFFFF;background-color:rgb(14,219,212);margin:5px 84px">
+        </form>
+     </div>   
+    </div>
+  
+</body>
+</html>

@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>  
+<html>  
+<head>  
+    <meta charset="UTF-8">
+    <title>index.html</title>
+    <link rel="stylesheet" type="text/css" href="lab1-3.css">
+    <style type="text/css">
+        a {text-decoration:none}
+        #header
+        {
+            height:30px;
+            background-color:rgb(0,0,0);
+            text-align:left;
+            padding:1px 20px 1px 20px;
+        }
+        #Verdana
+        {
+            font-family:Verdana;
+            font-weight: bold;
+        }
+        #sidebar
+        {
+            background-color:rgb(0,0,0);
+            float:left;
+            height:1000px;
+            width:140px;
+            padding:5px;    
+        }
+        #menu
+        {
+            background-color:#FFFFFF;
+            height: 27px;
+            width:1162px;
+            padding: 2px;
+        }
+        #mainbar
+        {
+            background-color:rgb(245,245,245);
+    
+            height:960px;
+            width:1325px;
+            padding:10px;
+
+        }
+         
+         #fabu
+        {
+            background-color:rgb(255,255,255);
+            
+            height:240px;
+            width:1000px;
+            padding: 2px 10px;
+
+        }
+         
+    </style>
+</head>
+<body>
+    <div id="header">
+   
+        <h4 id="Verdana" style="position:absolute;top:-8px;left:20px;color:rgb(20,210,210);">师大小灵通</h4>
+        <a style="color:rgb(20,200,200);position: absolute;top:13px;right:20px;" href="/login">退出</a><br/>
+    </div>
+
+
+  
+    <div id="sidebar">
+       
+            <br/>
+            <img  src="/statics/image/shiwu1.png" / width=40px height=125px / style="position: absolute;top:50px;left: 10px;">
+            <a style="color:white;position: absolute;top:60px;left: 50px;" href="{% url "dashboard" %}">失物招领</a><br/>
+           
+            <a style="color:white;position: absolute;top:89px;left: 50px;" href="{% url "sxiaoyuanka" %}">寻物启事</a><br/>
+            
+            <a style="color:white;position: absolute;top:118px;left: 50px;" href="{% url "lifein" %}">各类信息</a><br/>
+            
+            <a style="color:rgb(100,245,245);position: absolute;top:147px;left: 50px;" href="/index.html">讨论区</a><br/>
+    </div>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>  
+    <title></title>  
+    <meta charset="utf-8" />  
+  
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>  
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
+    <style type="text/css">  
+        html, body {margin:4px} /*非常重要的样式让背景图片100%适应整个屏幕*/  
+        
+        .my-navbar {padding:20px 0;transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;}  
+        .my-navbar a{background:transparent !important;color:#000000 !important}  
+        .my-navbar a:hover {color:#FF6347 !important;background:transparent;outline:0}  
+        .my-navbar a {transition: color 0.5s ease-in-out;}/*-webkit-transition ;-moz-transition*/  
+        .top-nav {padding:0;background:#FFEC8B;}  
+        button.navbar-toggle {background-color:#fbfbfb;}/*整个背景都是transparent透明的，会看不到，所以再次覆盖一下*/  
+        button.navbar-toggle > span.icon-bar {background-color:#dedede}  
+        
+    </style> 
+    <script>
+        function fillB(){
+                document.getElementById("inputB").value = document.getElementById("inputA").value;
+        }
+    </script>
+</head>  
+<body>  
+    <nav class="navbar navbar-fixed-top my-navbar" role="navigation" style="position:absolute;top:30px;left:200px">  
+        <div class="container-fluid" >  
+            <div class="navbar-header">  
+                
+                <a class="navbar-brand">师大讨论区</a>  
+            </div>  
+            <div class="collapse navbar-collapse" id="example-navbar-collapse">  
+                <ul class="nav navbar-nav"> 
+                
+            <li class="active"><a href="/study/">我爱学习</a></li>
+            <li class="active"><a href="/job/">我爱工作</a></li>
+            <li class="active"><a href="/unuse/">我爱旅游</a></li>
+            <li class="active"><a href="/travel/">闲置交易</a></li>
+           
+            <li class="active"><a href="/blog/">我有酒等你的故事</a></li>
+            {% for category in bbs_category %}
+                    {% ifequal category.id cate_id %}
+                        <li class="active"><a href="/category/{{ category.id }}/">{{ category.name }}</a></li>
+                    {% else %}
+                        <li class=""><a href="/category/{{ category.id }}/">{{ category.name }}</a></li>
+                    {% endifequal %}
+                {% endfor %}
+                
+                </ul>  
+                
+                
+          
+          
+            </div>  
+        </div>  
+    </nav>  
+    
+    
+    
+
+    
+    
+    
+    
+    <div class="container center-container-hx"> <!-- 放置可重用的数据-->
+     <!--下面的代码为动态页面，此页面为母版，其他网站可以重用block中的数据，只要继承母版即可-->
+     {% block page-content %}
+      <!-- Main component for a primary marketing message or call to action -->
+      
+      <br/>
+      <hr>
+      <div class="contents">
+        {% for bbs in bbs_list %}
+            <!--论坛首页链接标题-->
+            <a href="/detail/{{ bbs.id }}">{{ bbs.title }}</a><!--点击标题跳转到bbs_detail.html-->
+            <br>
+            {{ bbs.summary }}
+            <br>
+            <hr>
+        {% endfor %}
+      </div>
+     {% endblock %}
+    </div> <!-- /container -->
+  
+    <script>  
+        $(window).scroll(function () {  
+            if ($(".navbar").offset().top > 50) {$(".navbar-fixed-top").addClass("top-nav");  
+            }else {$(".navbar-fixed-top").removeClass("top-nav");}  
+        })</script>  
+        
+      
+  
+
+</body></html>  

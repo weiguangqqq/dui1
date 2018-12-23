@@ -1,0 +1,11 @@
+<div align="center">
+          <img  src="/statics/image/1.png"/ width=250px height=100px >
+
+{%   block page-content%}
+
+{% block content %}
+  <h1 align="center">欢迎 {{ new_user.first_name }}!</h1>
+  <p align="center">欢迎加入师大小灵通→ <a href="{% url "login" %}">点击进入</a>.</p>
+{% endblock %}
+{% endblock %}
+</div>

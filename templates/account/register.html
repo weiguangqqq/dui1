@@ -1,0 +1,16 @@
+
+{%  block page-content%}
+{% block content %}
+<div align="center">
+          <img  src="/statics/image/1.png"/ width=250px height=100px >
+
+  <h1 align="center">欢迎加入师大小灵通的行列</h1>
+  <p align="center">请写下您的有关信息:</p>
+  <form action="." align="center" method="post">
+    {{ user_form.as_p }}
+    {% csrf_token %}
+    <p align="center"><input type="submit" value="注册"></p>
+  </form>
+{% endblock %}
+{% endblock %}
+</div>
